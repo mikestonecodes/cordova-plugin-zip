@@ -13,6 +13,8 @@ import org.apache.commons.compress.archivers.ArchiveInputStream;
 import org.apache.commons.compress.archivers.ArchiveStreamFactory;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 
+import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
+import org.apache.commons.compress.archivers.zip.ZipEncodingHelper;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaResourceApi.OpenForReadResult;
@@ -111,7 +113,7 @@ public class Zip extends CordovaPlugin {
             }
 
             // The inputstream is now pointing at the start of the actual zip file content.
-            ArchiveInputStream zis = new ArchiveStreamFactory().createArchiveInputStream("zip", inputStream);
+            ArchiveInputStream zis = new ZipArchiveInputStream(inputStream, "UTF8", true, true); //new ArchiveStreamFactory().createArchiveInputStream("zip", inputStream);
             inputStream = zis;
 
             ZipArchiveEntry ze;
